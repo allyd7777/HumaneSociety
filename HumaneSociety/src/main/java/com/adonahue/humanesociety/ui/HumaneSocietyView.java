@@ -42,7 +42,7 @@ public class HumaneSocietyView {
         io.print("Which dog would you like to take home today!?");
     }
     
-    public void displayEditDogBannder() {
+    public void displayEditDogBanner() {
         io.print("Edit a dog:");
     }
     
@@ -76,5 +76,34 @@ public class HumaneSocietyView {
         newDog.setAdoptionCost(adoptionCost);
         newDog.setAdmissionDate(admissionDate);
         return newDog;
+    }
+    
+    public String getIdToRemove() {
+      return  io.readString("Please enter the ID of the dog you would like to adopt!");
+    }
+    
+    public String getDogToEdit() {
+        String idToEdit = io.readString("Please enter the ID of the dog you would like to edit.");
+        return idToEdit;
+    }
+    
+    public int printEditMenuAndGetSelection() {
+        io.print("===Edit Dog Info===");
+        io.print("What would you like to edit?:");
+        io.print("1. Dog Name");
+        io.print("2. Dog size");
+        io.print("3. Dog age");
+        io.print("4. Adoption Cost");
+        io.print("5. Admission Date");
+        
+        return io.readInt("Please select from the above options", 1, 5);
+    }
+    
+    public void displayDonateADogSuccssBanner() {
+        io.print("Dog has been successfull donated. Bittersweet.");
+    }
+    
+    public void displayEditSuccessDogBanner() {
+        io.print("Dog profile sucessfully edited! Look at you go!");
     }
 }
