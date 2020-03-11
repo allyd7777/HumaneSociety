@@ -12,6 +12,7 @@ public interface InventoryDao {
     
     List<Dog> getAllDogs();
     Map<String, Dog> passthroughMap();
+    Dog removeDog(String id);
     
     String marshallInventory(Dog dog);
     

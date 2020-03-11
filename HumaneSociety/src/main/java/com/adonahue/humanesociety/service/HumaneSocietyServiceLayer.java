@@ -17,4 +17,6 @@ public interface HumaneSocietyServiceLayer {
     void setCurrentMoney(BigDecimal balance);
     
     Dog getDog(String id);
+    
+    void removeDog(String id);
 }

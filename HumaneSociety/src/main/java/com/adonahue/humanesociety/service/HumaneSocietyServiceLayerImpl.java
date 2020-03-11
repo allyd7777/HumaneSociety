@@ -41,5 +41,10 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer{
        return dao.passthroughMap().get(id);
     }
     
+    @Override
+    public void removeDog(String id){
+        dao.removeDog(id);
+    }
+    
     
 }

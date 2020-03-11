@@ -89,13 +89,11 @@ public class HumaneSocietyController {
     //Adopt a dog method
     private void adoptADog() throws HumaneSocietyDaoException {
         view.displayAdoptADogBanner();
-
-        String dogId = view.getAdoptionDogId(); // Verify the call method for getDogIdChoice
+        String dogId = view.getAdoptionDogId(); 
         BigDecimal balance = service.getCurrentMoney();
         BigDecimal newMoney = balance.subtract(service.getDog(dogId).getAdoptionCost());
         service.setCurrentMoney(newMoney);
-
-        service.removeDog(dogId); // verify call method for removeDog?
+        service.removeDog(dogId); 
         view.displayAdoptADogSuccessBanner();
     }
     
