@@ -1,19 +1,10 @@
 package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
-import com.adonahue.humanesociety.dto.Money;
-import com.adonahue.humanesociety.service.HumaneSocietyServiceLayer;
-import com.adonahue.humanesociety.service.HumaneSocietyServiceLayerImpl;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -21,7 +12,6 @@ import java.util.Scanner;
  */
 public class BudgetDaoImpl implements BudgetDao {
 
-    HumaneSocietyServiceLayer service = new HumaneSocietyServiceLayerImpl();
     private static final String DELIMITER = "::";
     private static final String BUDGET_FILE = "budget.txt";
 
