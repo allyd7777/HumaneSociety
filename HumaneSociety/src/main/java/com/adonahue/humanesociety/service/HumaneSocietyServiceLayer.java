@@ -10,6 +10,8 @@ import java.util.List;
  * @author allison
  */
 public interface HumaneSocietyServiceLayer {
+    
+    void load() throws HumaneSocietyDaoException;
 
     List<Dog> getAllDogs() throws HumaneSocietyDaoException;
 

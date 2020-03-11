@@ -22,62 +22,58 @@ import java.util.stream.Collectors;
  * @author allison
  */
 public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer {
-    
+
     InventoryDao dao = new InventoryDaoImpl();
     BudgetDao bdao = new BudgetDaoImpl();
     Money currentMoney = new Money();
-    
+
     public HumaneSocietyServiceLayerImpl(InventoryDaoImpl dao, BudgetDaoImpl bdao) {
         this.dao = dao;
         this.bdao = bdao;
     }
-    
+
     @Override
     public List<Dog> getAllDogs() throws HumaneSocietyDaoException {
         dao.loadInventory();
         return dao.getAllDogs();
     }
-    
+
     @Override
     public BigDecimal getCurrentMoney() {
         return currentMoney.getBalance();
     }
-    
+
     @Override
     public void setCurrentMoney(BigDecimal balance) {
         currentMoney.setBalance(balance);
     }
-    
+
     @Override
     public Dog getDog(String id) {
-        List<Dog> dogs = dao.passthroughMap().values()
-                .stream().filter(dog -> dog.getDogId().equalsIgnoreCase(id))
-                .collect(Collectors.toList());
-        return dogs.get(0);
+        return dao.passthroughMap().get(id);
     }
-    
+
     @Override
     public void removeDog(String id) throws HumaneSocietyDaoException {
         dao.loadInventory();
         dao.removeDog(id);
         dao.writeInventory();
     }
-    
+
     @Override
     public void createDog(Dog dog) throws HumaneSocietyDaoException {
         dao.loadInventory();
         dao.createDog(dog);
         dao.writeInventory();
     }
-    
+
     @Override
     public void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException {
         bdao.writeBudget(dog, newMoney);
     }
-    
+
     @Override
     public void editDog(Dog dog, String Change, boolean keepGoing, int editSelection) throws HumaneSocietyDaoException {
-        dao.loadInventory();
         switch (editSelection) {
             case 1:
                 dog.setDogName(Change);
@@ -98,5 +94,11 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
                 keepGoing = false;
         }
         dao.writeInventory();
+    }
+    
+    @Override
+    public void load() throws HumaneSocietyDaoException{
+        dao.loadInventory();
+        
     }
 }

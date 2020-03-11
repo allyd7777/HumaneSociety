@@ -67,7 +67,17 @@ public class HumaneSocietyView {
         String dogName = io.readString("What is the name of the  new dog? ");
         String dogSize = io.readString("What is the size of the new dog? ");
         double dogAge = io.readDouble("What is the age of the new dog in years?");
-        BigDecimal adoptionCost = io.readBigDecimal("What is the adoption cost of the new dog?");
+        boolean isNegative = true;
+        BigDecimal zero = new BigDecimal(0);
+        BigDecimal adoptionCost = new BigDecimal(0);
+        while (isNegative) {
+            adoptionCost = io.readBigDecimal("What is the adoption cost of the new dog?");
+            if (adoptionCost.compareTo(zero) < 0) {
+                isNegative = true;
+            } else {
+                isNegative = false;
+            }
+        }
         admissionDate = LocalDate.now();
         Dog newDog = new Dog(newId);
         newDog.setDogName(dogName);
@@ -103,8 +113,8 @@ public class HumaneSocietyView {
 
         return io.readInt("Please select from the above options", 1, 5);
     }
-    
-    public String editChange(){
+
+    public String editChange() {
         return io.readString("What would you like to change this to?");
     }
 

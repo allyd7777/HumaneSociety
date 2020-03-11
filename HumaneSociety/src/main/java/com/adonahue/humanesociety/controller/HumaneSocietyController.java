@@ -23,7 +23,8 @@ public class HumaneSocietyController {
     }
 
     // Run method
-    public void run() {
+    public void run() throws HumaneSocietyDaoException{
+        service.load();
         boolean keepGoing = true;
         int menuSelection = 0;
         try {
@@ -102,8 +103,9 @@ public class HumaneSocietyController {
             int editSelection = view.printEditMenuAndGetSelection();
             if (editSelection != 6) {
                 String Change = view.editChange();
-
                 service.editDog(dog, Change, keepGoing, editSelection);
+            }else{
+                keepGoing = false;
             }
         }
 
