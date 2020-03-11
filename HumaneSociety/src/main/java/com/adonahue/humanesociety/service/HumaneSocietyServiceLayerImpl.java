@@ -15,7 +15,6 @@ import com.adonahue.humanesociety.dto.Money;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import javafx.collections.ListChangeListener.Change;
 
 /**
  *
