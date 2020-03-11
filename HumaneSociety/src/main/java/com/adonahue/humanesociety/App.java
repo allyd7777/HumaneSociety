@@ -1,6 +1,6 @@
 package com.adonahue.humanesociety;
 
-import java.lang.ModuleLayer.Controller;
+import com.adonahue.humanesociety.controller.HumaneSocietyController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) {
         
          ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-         Controller controller = ctx.getBean("controller", Controller.class);
+         HumaneSocietyController controller = ctx.getBean("controller", HumaneSocietyController.class);
         controller.run();
     }
 }

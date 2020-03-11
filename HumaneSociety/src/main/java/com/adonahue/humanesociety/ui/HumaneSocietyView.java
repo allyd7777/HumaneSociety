@@ -102,6 +102,10 @@ public class HumaneSocietyView {
 
         return io.readInt("Please select from the above options", 1, 5);
     }
+    
+    public String editChange(){
+        return io.readString("What would you like to change this to?");
+    }
 
     public void displayDonateADogSuccssBanner() {
         io.print("Dog has been successfull donated. Bittersweet.");

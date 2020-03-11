@@ -5,6 +5,7 @@ import com.adonahue.humanesociety.dto.Dog;
 import com.adonahue.humanesociety.service.HumaneSocietyServiceLayer;
 import com.adonahue.humanesociety.ui.HumaneSocietyView;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -93,21 +94,40 @@ public class HumaneSocietyController {
     private void editDogProfile() throws HumaneSocietyDaoException {
         view.displayEditDogBanner();
         String dogId = view.getDogToEdit();
-        if (dao.editNameLogic(dvdName)) {
-            DVD editDVD = view.getEditDVDInfo(dvdName);
-            dao.addDVD(editDVD.getDvdName(), editDVD);
-            view.displayEditSuccessBanner();
-        } else {
-            view.displayNoEditDVD();
+        Dog dog = service.getDog(dogId);
+        int editSelection = view.printEditMenuAndGetSelection();
+        String Change = view.editChange();
+        boolean keepGoing = true;
+        while (keepGoing) {
+            switch (editSelection) {
+                case 1:
+                    dog.setDogName(Change);
+                    break;
+                case 2:
+                    dog.setDogSize(Change);
+                    break;
+                case 3:
+                    dog.setDogAge(Double.parseDouble(Change));
+                    break;
+                case 4:
+                    dog.setAdoptionCost(new BigDecimal(Change));
+                    break;
+                case 5:
+                    dog.setAdmissionDate(LocalDate.parse(Change));
+                    break;
+                case 6:
+                    keepGoing = false;
+            }
         }
+
         view.displayEditSuccessDogBanner();
     }
-    
+
     //Unknown method
     private void unknownCommand() {
         view.displayUnknownCommandBanner();
     }
-    
+
     //Exit method
     private void exitMessage() {
         view.displayExitBanner();
