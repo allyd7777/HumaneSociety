@@ -110,4 +110,12 @@ public class HumaneSocietyView {
     public void displayEditSuccessDogBanner() {
         io.print("Dog profile sucessfully edited! Look at you go!");
     }
+    
+    public void displayAdoptADogSuccessBanner() {
+        io.print("Dog successfully adopted! Bye, buddy, have fun with your new parent(s)!");
+    }
+    
+    public String getDogToAdopt() {
+       return io.readString("Please enter the ID for the dog you want to adopt");
+    }
 }
