@@ -64,11 +64,11 @@ public class HumaneSocietyView {
     public Dog getNewDogInfo() {
         LocalDate admissionDate;
         String newId = io.readString("Please enter the new dog ID");
-        newId = newId.replaceAll("::", "");
+        newId = newId.replaceAll(":", "");
         String dogName = io.readString("What is the name of the  new dog? ");
-        dogName = dogName.replaceAll("::", "");
+        dogName = dogName.replaceAll(":", "");
         String dogSize = io.readString("What is the size of the new dog? ");
-        dogSize = dogSize.replaceAll("::", "");
+        dogSize = dogSize.replaceAll(":", "");
         double dogAge = io.readDouble("What is the age of the new dog in years?");
         boolean isNegative = true;
         BigDecimal zero = new BigDecimal(0);
