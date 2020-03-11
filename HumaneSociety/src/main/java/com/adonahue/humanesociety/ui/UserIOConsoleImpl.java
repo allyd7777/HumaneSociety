@@ -58,6 +58,9 @@ public class UserIOConsoleImpl implements UserIO {
         System.out.println(prompt);
         try{
         String input = sc.nextLine();
+        if (input.isEmpty()) {
+            System.out.println("Not a String!");
+        }
             return input;
         } catch (Exception e) {
             System.out.println("Not a String!");
