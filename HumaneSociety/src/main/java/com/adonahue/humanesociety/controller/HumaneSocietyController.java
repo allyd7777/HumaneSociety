@@ -92,7 +92,7 @@ public class HumaneSocietyController {
     }
     
     //Edit dog method
-     private void editDog() throws HumaneSocietyDaoException {
+     private void editDogProfile() throws HumaneSocietyDaoException {
         view.displayEditDogBanner();
         String dogId = view.getDogIdChoice();
         if (dao.editNameLogic(dvdName)) {
