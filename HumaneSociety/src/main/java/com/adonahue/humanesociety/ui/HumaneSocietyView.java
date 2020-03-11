@@ -1,8 +1,9 @@
 package com.adonahue.humanesociety.ui;
 
 import com.adonahue.humanesociety.dto.Dog;
-import java.time.DateTimeException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -61,15 +62,19 @@ public class HumaneSocietyView {
     }
     
     public Dog getNewDogInfo() {
+        LocalDate admissionDate;
         String newId = io.readString("Please enter the new dog ID");
-        LocalDate admissionDate = null;
-        String stringReleaseDate = "";
-        try {
-        addmissionDate = LocalDate.parse(io.readString("Please enter the release date in a yyyy-MM-dd format"));
-        
-        } catch (DateTimeException e) {
-            System.out.println("Date format not valid");;
-        }
-        
+        String dogName = io.readString("What is the name of the  new dog? ");
+        String dogSize = io.readString("What is the size of the new dog? ");
+        double dogAge = io.readDouble("What is the age of the new dog in years?");
+        BigDecimal adoptionCost = io.readBigDecimal("What is the adoption cost of the new dog?");
+        admissionDate = LocalDate.now();
+        Dog newDog = new Dog(newId);
+        newDog.setDogName(dogName);
+        newDog.setDogSize(dogSize);
+        newDog.setDogAge(dogAge);
+        newDog.setAdoptionCost(adoptionCost);
+        newDog.setAdmissionDate(admissionDate);
+        return newDog;
     }
 }
