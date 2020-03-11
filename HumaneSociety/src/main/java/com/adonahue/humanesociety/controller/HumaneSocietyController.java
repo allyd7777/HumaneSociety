@@ -73,16 +73,34 @@ public class HumaneSocietyController {
         view.displayDonateADogBanner();
         boolean hasErrors = false;
         do {
-            Dog currentDog = view.getNewStudentInfo(); //****Verify the call method
+            Dog currentDog = view.getNewDogInfo();
             try {
-                service.createStudent(currentDog); //****Verify the call method
-                view.displayCreateSuccesBanner(); ////****Verify if Banner is created?
+                service.createDog(currentDog); //****Verify the call method
                 hasErrors = false;
             } catch (HumaneSocietyDaoException e) {
                 hasErrors = true;
-                view.displayErrorMessage(e.getMessage());
+                System.out.println("ERROR: Could not create donate dog profile.");
             }
         } while (hasErrors);
+    }
+    
+    //Adopt a dog method
+    private void adoptADog() throws HumaneSocietyDaoException {
+        view.displayAdoptADogBanner();
+        String dogId = view.getDogIdChoice(); // Verify the call method for getDogIdChoice
+        service.removeDog(dogId); // verify call method for removeDog?
+    }
+    
+    //Edit dog method
+     private void editDog() throws HumaneSocietyDaoException {
+        view.displayEditDogBanner();
+        String dogId = view.getDogIdChoice();
+        if (dao.editNameLogic(dvdName)) {
+            DVD editDVD = view.getEditDVDInfo(dvdName);
+            dao.addDVD(editDVD.getDvdName(), editDVD);
+            view.displayEditSuccessBanner();
+        } else view.displayNoEditDVD();
+
     }
 
 
