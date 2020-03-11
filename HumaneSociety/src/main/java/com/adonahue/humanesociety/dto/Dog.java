@@ -55,7 +55,7 @@ public class Dog {
     }
 
     public void setAdmissionDate(LocalDate admissionDate) {
-        this.admissionDate = adimissionDate;
+        this.admissionDate = admissionDate;
     }
     
 }

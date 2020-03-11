@@ -1,13 +1,15 @@
 package com.adonahue.humanesociety.dao;
 
+import com.adonahue.humanesociety.dto.Dog;
+
 /**
  *
  * @author allison
  */
 public interface InventoryDao {
     
-    void marshallInventory(Dog dog);
+    String marshallInventory(Dog dog);
     
-    void unmarshallInventory(String dogAsText);
+    Dog unmarshallInventory(String dogAsText);
     
 }
