@@ -8,14 +8,23 @@ import java.time.LocalDate;
  * @author allison
  */
 public class Dog {
-    private String dogName; //Key
+    private String dogId; //Key
+    private String dogName; //Values
     private String dogSize; //Values
     private double dogAge; //Values
     private BigDecimal adoptionCost; //Values
-    private LocalDate adimissionDate; //Values
+    private LocalDate admissionDate; //Values
     
-    public Dog(String dogName) { //Constructor for dog name.
-        this.dogName = dogName;
+    public Dog(String dogId) { //Constructor for dog id.
+        this.dogId = dogId;
+    }
+
+    public String getDogId() {
+        return dogId;
+    }
+
+    public void setDogId(String dogId) {
+        this.dogId = dogId;
     }
 
     public String getDogName() {
@@ -50,12 +59,12 @@ public class Dog {
         this.adoptionCost = adoptionCost;
     }
 
-    public LocalDate getAdimissionDate() {
-        return adimissionDate;
+    public LocalDate getAdmissionDate() {
+        return admissionDate;
     }
 
-    public void setAdimissionDate(LocalDate adimissionDate) {
-        this.adimissionDate = adimissionDate;
+    public void setAdmissionDate(LocalDate admissionDate) {
+        this.admissionDate = admissionDate;
     }
     
 }
