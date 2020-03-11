@@ -4,6 +4,10 @@ package com.adonahue.humanesociety.dao;
  *
  * @author allison
  */
-public class InventoryDao {
+public interface InventoryDao {
+    
+    void marshallInventory(Dog dog);
+    
+    void unmarshallInventory(String dogAsText);
     
 }

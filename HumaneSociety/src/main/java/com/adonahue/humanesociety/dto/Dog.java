@@ -12,7 +12,7 @@ public class Dog {
     private String dogSize; //Values
     private double dogAge; //Values
     private BigDecimal adoptionCost; //Values
-    private LocalDate adimissionDate; //Values
+    private LocalDate admissionDate; //Values
     
     public Dog(String dogName) { //Constructor for dog name.
         this.dogName = dogName;
@@ -50,12 +50,12 @@ public class Dog {
         this.adoptionCost = adoptionCost;
     }
 
-    public LocalDate getAdimissionDate() {
-        return adimissionDate;
+    public LocalDate getAdmissionDate() {
+        return admissionDate;
     }
 
-    public void setAdimissionDate(LocalDate adimissionDate) {
-        this.adimissionDate = adimissionDate;
+    public void setAdmissionDate(LocalDate admissionDate) {
+        this.admissionDate = adimissionDate;
     }
     
 }
