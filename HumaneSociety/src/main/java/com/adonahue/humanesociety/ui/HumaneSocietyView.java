@@ -99,6 +99,7 @@ public class HumaneSocietyView {
         io.print("3. Dog age");
         io.print("4. Adoption Cost");
         io.print("5. Admission Date");
+        io.print("6. Done Editing");
 
         return io.readInt("Please select from the above options", 1, 5);
     }

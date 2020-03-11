@@ -13,7 +13,9 @@ import com.adonahue.humanesociety.dao.InventoryDao;
 import com.adonahue.humanesociety.dao.InventoryDaoImpl;
 import com.adonahue.humanesociety.dto.Money;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import javafx.collections.ListChangeListener.Change;
 
 /**
  *
@@ -60,8 +62,33 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
         dao.writeInventory();
     }
 
+    @Override
     public void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException{
         bdao.writeBudget(dog, newMoney);
     }
 
+    @Override
+    public void editDog(Dog dog, String Change, boolean keepGoing, int editSelection) throws HumaneSocietyDaoException{
+        dao.loadInventory();
+        switch (editSelection) {
+                case 1:
+                    dog.setDogName(Change);
+                    break;
+                case 2:
+                    dog.setDogSize(Change);
+                    break;
+                case 3:
+                    dog.setDogAge(Double.parseDouble(Change));
+                    break;
+                case 4:
+                    dog.setAdoptionCost(new BigDecimal(Change));
+                    break;
+                case 5:
+                    dog.setAdmissionDate(LocalDate.parse(Change));
+                    break;
+                case 6:
+                    keepGoing = false;
+            }
+        dao.writeInventory();
+    }
 }

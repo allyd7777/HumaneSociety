@@ -95,29 +95,11 @@ public class HumaneSocietyController {
         view.displayEditDogBanner();
         String dogId = view.getDogToEdit();
         Dog dog = service.getDog(dogId);
-        int editSelection = view.printEditMenuAndGetSelection();
-        String Change = view.editChange();
         boolean keepGoing = true;
         while (keepGoing) {
-            switch (editSelection) {
-                case 1:
-                    dog.setDogName(Change);
-                    break;
-                case 2:
-                    dog.setDogSize(Change);
-                    break;
-                case 3:
-                    dog.setDogAge(Double.parseDouble(Change));
-                    break;
-                case 4:
-                    dog.setAdoptionCost(new BigDecimal(Change));
-                    break;
-                case 5:
-                    dog.setAdmissionDate(LocalDate.parse(Change));
-                    break;
-                case 6:
-                    keepGoing = false;
-            }
+            int editSelection = view.printEditMenuAndGetSelection();
+            String Change = view.editChange();
+            service.editDog(dog, Change, keepGoing, editSelection);
         }
 
         view.displayEditSuccessDogBanner();
