@@ -83,10 +83,12 @@ public class HumaneSocietyController {
         view.displayAdoptADogBanner();
         String dogId = view.getAdoptionDogId();
         BigDecimal balance = service.getCurrentMoney();
-        BigDecimal newMoney = balance.subtract(service.getDog(dogId).getAdoptionCost());
+        BigDecimal newMoney = balance.add(service.getDog(dogId).getAdoptionCost());
         service.setCurrentMoney(newMoney);
-        service.removeDog(dogId);
+        service.getDog(dogId).setAdoptionDate(LocalDate.now());
         service.writeBudget(service.getDog(dogId), newMoney);
+        service.removeDog(dogId);
+
         view.displayAdoptADogSuccessBanner();
     }
 
@@ -98,8 +100,11 @@ public class HumaneSocietyController {
         boolean keepGoing = true;
         while (keepGoing) {
             int editSelection = view.printEditMenuAndGetSelection();
-            String Change = view.editChange();
-            service.editDog(dog, Change, keepGoing, editSelection);
+            if (editSelection != 6) {
+                String Change = view.editChange();
+
+                service.editDog(dog, Change, keepGoing, editSelection);
+            }
         }
 
         view.displayEditSuccessDogBanner();

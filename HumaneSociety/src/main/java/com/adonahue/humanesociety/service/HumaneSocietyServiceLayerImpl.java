@@ -15,19 +15,18 @@ import com.adonahue.humanesociety.dto.Money;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author allison
  */
 public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer {
-
+    
     InventoryDao dao = new InventoryDaoImpl();
     BudgetDao bdao = new BudgetDaoImpl();
     Money currentMoney = new Money();
     
-    
-
     public HumaneSocietyServiceLayerImpl(InventoryDaoImpl dao, BudgetDaoImpl bdao) {
         this.dao = dao;
         this.bdao = bdao;
@@ -38,63 +37,66 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
         dao.loadInventory();
         return dao.getAllDogs();
     }
-
+    
     @Override
     public BigDecimal getCurrentMoney() {
         return currentMoney.getBalance();
     }
-
+    
     @Override
     public void setCurrentMoney(BigDecimal balance) {
         currentMoney.setBalance(balance);
     }
-
+    
     @Override
     public Dog getDog(String id) {
-        return dao.passthroughMap().get(id);
+        List<Dog> dogs = dao.passthroughMap().values()
+                .stream().filter(dog -> dog.getDogId().equalsIgnoreCase(id))
+                .collect(Collectors.toList());
+        return dogs.get(0);
     }
-
+    
     @Override
     public void removeDog(String id) throws HumaneSocietyDaoException {
         dao.loadInventory();
         dao.removeDog(id);
         dao.writeInventory();
     }
-
+    
     @Override
     public void createDog(Dog dog) throws HumaneSocietyDaoException {
         dao.loadInventory();
         dao.createDog(dog);
         dao.writeInventory();
     }
-
+    
     @Override
-    public void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException{
+    public void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException {
         bdao.writeBudget(dog, newMoney);
     }
-
+    
     @Override
-    public void editDog(Dog dog, String Change, boolean keepGoing, int editSelection) throws HumaneSocietyDaoException{
+    public void editDog(Dog dog, String Change, boolean keepGoing, int editSelection) throws HumaneSocietyDaoException {
         dao.loadInventory();
         switch (editSelection) {
-                case 1:
-                    dog.setDogName(Change);
-                    break;
-                case 2:
-                    dog.setDogSize(Change);
-                    break;
-                case 3:
-                    dog.setDogAge(Double.parseDouble(Change));
-                    break;
-                case 4:
-                    dog.setAdoptionCost(new BigDecimal(Change));
-                    break;
-                case 5:
-                    dog.setAdmissionDate(LocalDate.parse(Change));
-                    break;
-                case 6:
-                    keepGoing = false;
-            }
+            case 1:
+                dog.setDogName(Change);
+                break;
+            case 2:
+                dog.setDogSize(Change);
+                break;
+            case 3:
+                dog.setDogAge(Double.parseDouble(Change));
+                break;
+            case 4:
+                dog.setAdoptionCost(new BigDecimal(Change));
+                break;
+            case 5:
+                dog.setAdmissionDate(LocalDate.parse(Change));
+                break;
+            case 6:
+                keepGoing = false;
+        }
         dao.writeInventory();
     }
 }
