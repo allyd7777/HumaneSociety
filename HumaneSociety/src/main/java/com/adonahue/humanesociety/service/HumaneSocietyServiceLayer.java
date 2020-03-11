@@ -1,5 +1,6 @@
 package com.adonahue.humanesociety.service;
 
+import com.adonahue.humanesociety.dao.HumaneSocietyDaoException;
 import com.adonahue.humanesociety.dto.Dog;
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface HumaneSocietyServiceLayer {
 
-    List<Dog> getAllDogs();
+    List<Dog> getAllDogs() throws HumaneSocietyDaoException;
 
     BigDecimal getCurrentMoney();
 
@@ -18,7 +19,9 @@ public interface HumaneSocietyServiceLayer {
 
     Dog getDog(String id);
 
-    void removeDog(String id);
+    void removeDog(String id) throws HumaneSocietyDaoException;
 
-    void createDog(Dog dog);
+    void createDog(Dog dog) throws HumaneSocietyDaoException;
+    
+     void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException;
 }

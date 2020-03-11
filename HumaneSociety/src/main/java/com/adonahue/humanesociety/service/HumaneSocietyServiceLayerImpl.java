@@ -5,6 +5,9 @@
  */
 package com.adonahue.humanesociety.service;
 
+import com.adonahue.humanesociety.dao.BudgetDao;
+import com.adonahue.humanesociety.dao.BudgetDaoImpl;
+import com.adonahue.humanesociety.dao.HumaneSocietyDaoException;
 import com.adonahue.humanesociety.dto.Dog;
 import com.adonahue.humanesociety.dao.InventoryDao;
 import com.adonahue.humanesociety.dao.InventoryDaoImpl;
@@ -19,10 +22,12 @@ import java.util.List;
 public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer {
 
     InventoryDao dao = new InventoryDaoImpl();
+    BudgetDao bdao = new BudgetDaoImpl();
     Money currentMoney = new Money();
 
     @Override
-    public List<Dog> getAllDogs() {
+    public List<Dog> getAllDogs() throws HumaneSocietyDaoException {
+        dao.loadInventory();
         return dao.getAllDogs();
     }
 
@@ -42,13 +47,21 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
     }
 
     @Override
-    public void removeDog(String id) {
+    public void removeDog(String id) throws HumaneSocietyDaoException {
+        dao.loadInventory();
         dao.removeDog(id);
+        dao.writeInventory();
     }
 
     @Override
-    public void createDog(Dog dog) {
+    public void createDog(Dog dog) throws HumaneSocietyDaoException {
+        dao.loadInventory();
         dao.createDog(dog);
+        dao.writeInventory();
+    }
+
+    public void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException{
+        bdao.writeBudget(dog, newMoney);
     }
 
 }

@@ -85,6 +85,7 @@ public class HumaneSocietyController {
         BigDecimal newMoney = balance.subtract(service.getDog(dogId).getAdoptionCost());
         service.setCurrentMoney(newMoney);
         service.removeDog(dogId);
+        service.writeBudget(service.getDog(dogId), newMoney);
         view.displayAdoptADogSuccessBanner();
     }
 
