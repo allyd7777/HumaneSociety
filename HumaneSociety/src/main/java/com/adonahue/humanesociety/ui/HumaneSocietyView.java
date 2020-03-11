@@ -118,4 +118,12 @@ public class HumaneSocietyView {
     public String getDogToAdopt() {
         return io.readString("Please enter the ID for the dog you want to adopt");
     }
+
+    public void displayExitBanner() {
+        io.print("Thank you for visiting Puppies R Us!!!!");
+    }
+
+    public void displayUnknownCommandBanner() {
+        io.print("UNKNOWN COMMAND");
+    }
 }

@@ -102,5 +102,15 @@ public class HumaneSocietyController {
         }
         view.displayEditSuccessDogBanner();
     }
+    
+    //Unknown method
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+    
+    //Exit method
+    private void exitMessage() {
+        view.displayExitBanner();
+    }
 
 }
