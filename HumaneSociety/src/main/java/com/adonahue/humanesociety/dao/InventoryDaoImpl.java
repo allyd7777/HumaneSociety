@@ -4,21 +4,36 @@ import com.adonahue.humanesociety.dto.Dog;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author allison
  */
-public class InventoryDaoImpl implements InventoryDao{
-    
+public class InventoryDaoImpl implements InventoryDao {
+
     private static final String DELIMITER = "::";
+    private static final String INVENTORY_FILE = "dogInventory.txt";
+    Map<String, Dog> dogs = new HashMap<>();
+
+    @Override
+    public List<Dog> getAllDogs() {
+        return dogs.values().stream().collect(Collectors.toList());
+    }
 
     @Override
     public String marshallInventory(Dog dog) {
-        String dogAsText = dog.getDogID() + DELIMITER;
+        String dogAsText = dog.getDogId() + DELIMITER;
         dogAsText += dog.getDogName() + DELIMITER;
         dogAsText += dog.getDogAge() + DELIMITER;
         dogAsText += dog.getDogSize() + DELIMITER;
@@ -40,7 +55,7 @@ public class InventoryDaoImpl implements InventoryDao{
 
         return DogFromFile;
     }
-    
+
     @Override
     public void loadInventory() throws HumaneSocietyDaoException {
         Scanner scanner;
@@ -48,17 +63,36 @@ public class InventoryDaoImpl implements InventoryDao{
             scanner = new Scanner(new BufferedReader(
                     new FileReader(INVENTORY_FILE)));
         } catch (FileNotFoundException e) {
-            throw new VendingMachineDaoException(
+            throw new HumaneSocietyDaoException(
                     "-_- Could not load inventory data into memory.", e);
         }
         String currentLine;
-        Item currentItem;
+        Dog currentDog;
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
-            currentItem = unmarshallInventory(currentLine);
-            items.put(currentItem.getId(), currentItem);
+            currentDog = unmarshallInventory(currentLine);
+            dogs.put(currentDog.getDogId(), currentDog);
         }
         scanner.close();
     }
-    
+
+    @Override
+    public void writeInventory() throws HumaneSocietyDaoException {
+        PrintWriter out;
+        String dogAsText;
+        List<Dog> dogList = this.getAllDogs();
+        try {
+            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+        } catch (IOException e) {
+            throw new HumaneSocietyDaoException(
+                    "Could not save dog data.", e);
+        }
+        for (Dog currentDog : dogList) {
+            dogAsText = marshallInventory(currentDog);
+            out.println(dogAsText);
+            out.flush();
+        }
+        out.close();
+    }
+
 }

@@ -9,7 +9,8 @@ package com.adonahue.humanesociety.dao;
  *
  * @author allison
  */
-public class HumaneSocietyDaoException extends Exception{
+public class HumaneSocietyDaoException extends Exception {
+
     public HumaneSocietyDaoException(String message) {
         super(message);
     }
