@@ -28,6 +28,11 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
     
     
 
+    public HumaneSocietyServiceLayerImpl(InventoryDaoImpl dao, BudgetDaoImpl bdao) {
+        this.dao = dao;
+        this.bdao = bdao;
+    }
+    
     @Override
     public List<Dog> getAllDogs() throws HumaneSocietyDaoException {
         dao.loadInventory();
