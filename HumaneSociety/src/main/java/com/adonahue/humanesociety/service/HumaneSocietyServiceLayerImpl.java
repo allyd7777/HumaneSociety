@@ -16,35 +16,39 @@ import java.util.List;
  *
  * @author allison
  */
-public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer{
-    
+public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer {
+
     InventoryDao dao = new InventoryDaoImpl();
     Money currentMoney = new Money();
-    
+
     @Override
-    public List<Dog> getAllDogs(){
-       return dao.getAllDogs();
+    public List<Dog> getAllDogs() {
+        return dao.getAllDogs();
     }
-    
+
     @Override
-    public BigDecimal getCurrentMoney(){
+    public BigDecimal getCurrentMoney() {
         return currentMoney.getBalance();
     }
-    
+
     @Override
-    public void setCurrentMoney(BigDecimal balance){
+    public void setCurrentMoney(BigDecimal balance) {
         currentMoney.setBalance(balance);
     }
-    
+
     @Override
-    public Dog getDog(String id){
-       return dao.passthroughMap().get(id);
+    public Dog getDog(String id) {
+        return dao.passthroughMap().get(id);
     }
-    
+
     @Override
-    public void removeDog(String id){
+    public void removeDog(String id) {
         dao.removeDog(id);
     }
-    
-    
+
+    @Override
+    public void createDog(Dog dog) {
+        dao.createDog(dog);
+    }
+
 }

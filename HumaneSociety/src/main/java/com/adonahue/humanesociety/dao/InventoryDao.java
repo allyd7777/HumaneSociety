@@ -9,17 +9,21 @@ import java.util.Map;
  * @author allison
  */
 public interface InventoryDao {
-    
+
     List<Dog> getAllDogs();
+
     Map<String, Dog> passthroughMap();
+
     Dog removeDog(String id);
-    
+
     String marshallInventory(Dog dog);
-    
+
     Dog unmarshallInventory(String dogAsText);
-    
+
     void loadInventory() throws HumaneSocietyDaoException;
-    
+
     void writeInventory() throws HumaneSocietyDaoException;
-    
+
+    void createDog(Dog dog);
+
 }

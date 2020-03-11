@@ -105,4 +105,9 @@ public class InventoryDaoImpl implements InventoryDao {
        return dogs.remove(id);
     }
 
+    @Override
+    public void createDog(Dog dog) {
+       dogs.put(dog.getDogId(), dog);
+    }
+
 }
