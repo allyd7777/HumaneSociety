@@ -2,6 +2,8 @@ package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
 import com.adonahue.humanesociety.dto.Money;
+import com.adonahue.humanesociety.service.HumaneSocietyServiceLayer;
+import com.adonahue.humanesociety.service.HumaneSocietyServiceLayerImpl;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,78 +19,35 @@ import java.util.Scanner;
  *
  * @author allison
  */
-public class BudgetDaoImpl implements BudgetDao{
-    
+public class BudgetDaoImpl implements BudgetDao {
+
+    HumaneSocietyServiceLayer service = new HumaneSocietyServiceLayerImpl();
     private static final String DELIMITER = "::";
     private static final String BUDGET_FILE = "budget.txt";
-    private Money balance;
-    
+
     @Override
-    public BigDecimal getBalance() {
-        return balance.getBalance();
+    public String marshallBudget(Dog dog, BigDecimal balance) {
+
+        String budgetAsText = balance + DELIMITER;
+        budgetAsText += dog.getDogId() + DELIMITER;
+        budgetAsText += dog.getAdoptionDate() + DELIMITER;
+        budgetAsText += dog.getAdoptionCost() + DELIMITER;
+        return budgetAsText;
     }
 
     @Override
-    public String marshallBudget(Dog dog) {
-        String dogAsText = dog.getDogId() + DELIMITER;
-        dogAsText += dog.getDogName() + DELIMITER;
-        dogAsText += dog.getDogAge() + DELIMITER;
-        dogAsText += dog.getDogSize() + DELIMITER;
-        dogAsText += dog.getAdoptionCost() + DELIMITER;
-        dogAsText += dog.getAdmissionDate() + DELIMITER;
-        return dogAsText;
-    }
-
-    @Override
-    public Dog unmarshallInventory(String dogAsText) {
-        String[] inventoryTokens = dogAsText.split(DELIMITER);
-        String id = inventoryTokens[0];
-        Dog DogFromFile = new Dog(id);
-        DogFromFile.setDogName(inventoryTokens[1]);
-        DogFromFile.setDogAge(Double.parseDouble(inventoryTokens[2]));
-        DogFromFile.setDogSize(inventoryTokens[3]);
-        DogFromFile.setAdoptionCost(new BigDecimal(inventoryTokens[4]));
-        DogFromFile.setAdmissionDate(LocalDate.parse(inventoryTokens[5]));
-
-        return DogFromFile;
-    }
-
-    @Override
-    public void loadInventory() throws HumaneSocietyDaoException {
-        Scanner scanner;
-        try {
-            scanner = new Scanner(new BufferedReader(
-                    new FileReader(INVENTORY_FILE)));
-        } catch (FileNotFoundException e) {
-            throw new HumaneSocietyDaoException(
-                    "-_- Could not load inventory data into memory.", e);
-        }
-        String currentLine;
-        Dog currentDog;
-        while (scanner.hasNextLine()) {
-            currentLine = scanner.nextLine();
-            currentDog = unmarshallInventory(currentLine);
-            dogs.put(currentDog.getDogId(), currentDog);
-        }
-        scanner.close();
-    }
-
-    @Override
-    public void writeInventory() throws HumaneSocietyDaoException {
+    public void writeBudget(Dog dog, BigDecimal balance) throws HumaneSocietyDaoException {
         PrintWriter out;
-        String dogAsText;
-        List<Dog> dogList = this.getAllDogs();
+        String budgetAsText;
         try {
-            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+            out = new PrintWriter(new FileWriter(BUDGET_FILE, true));
         } catch (IOException e) {
             throw new HumaneSocietyDaoException(
-                    "Could not save dog data.", e);
+                    "Could not save budget data.", e);
         }
-        for (Dog currentDog : dogList) {
-            dogAsText = marshallInventory(currentDog);
-            out.println(dogAsText);
-            out.flush();
-        }
+        budgetAsText = marshallBudget(dog, balance);
+        out.println(budgetAsText);
+        out.flush();
         out.close();
     }
 

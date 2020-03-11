@@ -94,5 +94,10 @@ public class InventoryDaoImpl implements InventoryDao {
         }
         out.close();
     }
+    
+    @Override
+    public Map<String, Dog> passthroughMap(){
+        return dogs;
+    }
 
 }

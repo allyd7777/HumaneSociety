@@ -87,6 +87,10 @@ public class HumaneSocietyView {
         return idToEdit;
     }
     
+    public String getAdoptionDogId(){
+        return io.readString("Please enter the ID of the adopted dog.");
+    }
+    
     public int printEditMenuAndGetSelection() {
         io.print("===Edit Dog Info===");
         io.print("What would you like to edit?:");

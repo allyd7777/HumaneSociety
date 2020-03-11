@@ -2,6 +2,7 @@ package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -10,6 +11,7 @@ import java.util.List;
 public interface InventoryDao {
     
     List<Dog> getAllDogs();
+    Map<String, Dog> passthroughMap();
     
     String marshallInventory(Dog dog);
     
