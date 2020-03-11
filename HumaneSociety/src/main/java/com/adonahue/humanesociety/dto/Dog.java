@@ -14,6 +14,15 @@ public class Dog {
     private double dogAge; //Values
     private BigDecimal adoptionCost; //Values
     private LocalDate admissionDate; //Values
+    private LocalDate adoptionDate; //values
+
+    public LocalDate getAdoptionDate() {
+        return adoptionDate;
+    }
+
+    public void setAdoptionDate(LocalDate adoptionDate) {
+        this.adoptionDate = adoptionDate;
+    }
     
     public Dog(String dogId) { //Constructor for dog id.
         this.dogId = dogId;

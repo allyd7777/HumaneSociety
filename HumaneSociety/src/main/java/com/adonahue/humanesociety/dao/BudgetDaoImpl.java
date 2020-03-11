@@ -1,6 +1,7 @@
 package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
+import com.adonahue.humanesociety.dto.Money;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,30 +10,26 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  *
  * @author allison
  */
-public class InventoryDaoImpl implements InventoryDao {
-
+public class BudgetDaoImpl implements BudgetDao{
+    
     private static final String DELIMITER = "::";
-    private static final String INVENTORY_FILE = "dogInventory.txt";
-    Map<String, Dog> dogs = new HashMap<>();
-
+    private static final String BUDGET_FILE = "budget.txt";
+    private Money balance;
+    
     @Override
-    public List<Dog> getAllDogs() {
-        return dogs.values().stream().collect(Collectors.toList());
+    public BigDecimal getBalance() {
+        return balance.getBalance();
     }
 
     @Override
-    public String marshallInventory(Dog dog) {
+    public String marshallBudget(Dog dog) {
         String dogAsText = dog.getDogId() + DELIMITER;
         dogAsText += dog.getDogName() + DELIMITER;
         dogAsText += dog.getDogAge() + DELIMITER;
