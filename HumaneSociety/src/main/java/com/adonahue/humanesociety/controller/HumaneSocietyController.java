@@ -82,25 +82,27 @@ public class HumaneSocietyController {
                 System.out.println("ERROR: Could not create donate dog profile.");
             }
         } while (hasErrors);
+        view.displayDonateADogSuccssBanner();
     }
     
     //Adopt a dog method
     private void adoptADog() throws HumaneSocietyDaoException {
         view.displayAdoptADogBanner();
-        String dogId = view.getDogIdChoice(); // Verify the call method for getDogIdChoice
+        String dogId = view.getDogToAdopt(); // Verify the call method for getDogIdChoice
         service.removeDog(dogId); // verify call method for removeDog?
+        view.displayAdoptADogSuccessBanner();
     }
     
     //Edit dog method
      private void editDogProfile() throws HumaneSocietyDaoException {
         view.displayEditDogBanner();
-        String dogId = view.getDogIdChoice();
+        String dogId = view.getDogToEdit();
         if (dao.editNameLogic(dvdName)) {
             DVD editDVD = view.getEditDVDInfo(dvdName);
             dao.addDVD(editDVD.getDvdName(), editDVD);
             view.displayEditSuccessBanner();
         } else view.displayNoEditDVD();
-
+        view.displayEditSuccessDogBanner();
     }
 
 
