@@ -82,11 +82,22 @@ public class HumaneSocietyController {
     //Adopt a dog method
     private void adoptADog() throws HumaneSocietyDaoException {
         view.displayAdoptADogBanner();
-        String dogId = view.getAdoptionDogId();
+         Boolean isNull;
+         BigDecimal newMoney = new BigDecimal("0");
+         String dogId = "";
+        do {
+           isNull = false;
+            try{
+        dogId = view.getAdoptionDogId();
         Dog dog = service.getDog(dogId);
         
         BigDecimal balance = service.loadBudget();
-        BigDecimal newMoney = balance.add(dog.getAdoptionCost());
+        newMoney = balance.add(dog.getAdoptionCost());
+            } catch (NullPointerException e) {
+                System.out.println("We don't have that dog!");
+                isNull = true;
+            }
+        }while(isNull);
         service.setCurrentMoney(newMoney);
         service.getDog(dogId).setAdoptionDate(LocalDate.now());
         service.writeBudget(service.getDog(dogId), newMoney);
