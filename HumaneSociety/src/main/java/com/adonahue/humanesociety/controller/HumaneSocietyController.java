@@ -27,6 +27,7 @@ public class HumaneSocietyController {
         service.load();
         boolean keepGoing = true;
         int menuSelection = 0;
+        view.dogPicture();
         try {
             while (keepGoing) {
 
