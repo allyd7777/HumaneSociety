@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @author brian
  */
 public class Money {
-    private BigDecimal balance = new BigDecimal(-1000.00); 
+    private BigDecimal balance; 
     private BigDecimal overHeadCost;
 
     public BigDecimal getBalance() {

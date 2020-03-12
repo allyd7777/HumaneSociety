@@ -1,10 +1,15 @@
 package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  *
@@ -26,6 +31,14 @@ public class BudgetDaoImpl implements BudgetDao {
     }
 
     @Override
+    public BigDecimal unmarshallBudget(String balanceAsText) {
+        String[] balanceTokens = balanceAsText.split(DELIMITER);
+        BigDecimal newBalance = new BigDecimal(balanceTokens[0]);
+
+        return newBalance;
+    }
+
+    @Override
     public void writeBudget(Dog dog, BigDecimal balance) throws HumaneSocietyDaoException {
         PrintWriter out;
         String budgetAsText;
@@ -39,6 +52,26 @@ public class BudgetDaoImpl implements BudgetDao {
         out.println(budgetAsText);
         out.flush();
         out.close();
+    }
+
+    @Override
+    public BigDecimal loadBudget() throws HumaneSocietyDaoException {
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new BufferedReader(
+                    new FileReader(BUDGET_FILE)));
+        } catch (FileNotFoundException e) {
+            throw new HumaneSocietyDaoException(
+                    "-_- Could not load budget data into memory.", e);
+        }
+        String currentLine;
+        BigDecimal currentBalance = new BigDecimal(0);
+        while (scanner.hasNextLine()) {
+            currentLine = scanner.nextLine();
+            currentBalance = unmarshallBudget(currentLine);
+        }
+        scanner.close();
+        return currentBalance;
     }
 
 }

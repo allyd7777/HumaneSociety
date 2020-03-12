@@ -11,6 +11,10 @@ public interface BudgetDao {
     
     String marshallBudget(Dog dog, BigDecimal balance);
     
+    BigDecimal unmarshallBudget(String balanceAsText);
+    
+    BigDecimal loadBudget() throws HumaneSocietyDaoException;
+    
     void writeBudget(Dog dog, BigDecimal balance) throws HumaneSocietyDaoException;
     
 }

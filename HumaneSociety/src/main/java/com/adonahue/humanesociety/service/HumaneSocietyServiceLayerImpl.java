@@ -95,10 +95,10 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
         }
         dao.writeInventory();
     }
-    
+
     @Override
-    public void load() throws HumaneSocietyDaoException{
+    public void load() throws HumaneSocietyDaoException {
         dao.loadInventory();
-        
+        bdao.loadBudget();
     }
 }
