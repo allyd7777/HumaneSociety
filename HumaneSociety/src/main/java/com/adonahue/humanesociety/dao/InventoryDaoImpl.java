@@ -109,5 +109,13 @@ public class InventoryDaoImpl implements InventoryDao {
     public void createDog(Dog dog) {
        dogs.put(dog.getDogId(), dog);
     }
+    
+    public List<String> dogIds(Map<String, Dog> map) {
+        List<String> dogIds = new ArrayList<>();
+        for (String k : map.keySet()) {
+            dogIds.add(k);
+        }
+        return dogIds;
+    }
 
 }

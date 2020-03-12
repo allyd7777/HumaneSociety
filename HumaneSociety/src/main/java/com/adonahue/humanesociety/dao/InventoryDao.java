@@ -1,6 +1,7 @@
 package com.adonahue.humanesociety.dao;
 
 import com.adonahue.humanesociety.dto.Dog;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,5 +26,7 @@ public interface InventoryDao {
     void writeInventory() throws HumaneSocietyDaoException;
 
     void createDog(Dog dog);
+    
+   List<String> dogIds(Map<String, Dog> map);
 
 }

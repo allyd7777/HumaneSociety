@@ -30,4 +30,5 @@ public interface HumaneSocietyServiceLayer {
     void editDog(Dog dog, String Change, boolean keepGoing, int editSelection) throws HumaneSocietyDaoException;
     
      void writeBudget(Dog dog, BigDecimal newMoney) throws HumaneSocietyDaoException;
+     List<String> getDogIds();
 }

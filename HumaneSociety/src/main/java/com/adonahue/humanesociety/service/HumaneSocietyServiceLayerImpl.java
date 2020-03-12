@@ -14,8 +14,8 @@ import com.adonahue.humanesociety.dao.InventoryDaoImpl;
 import com.adonahue.humanesociety.dto.Money;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -104,5 +104,9 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
     @Override
     public BigDecimal loadBudget() throws HumaneSocietyDaoException{
        return bdao.loadBudget();
+    }
+    
+    public List<String> getDogIds() {
+        return dao.dogIds(dao.passthroughMap());
     }
 }

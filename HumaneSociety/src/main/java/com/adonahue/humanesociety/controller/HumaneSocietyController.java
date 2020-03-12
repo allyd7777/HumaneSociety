@@ -108,8 +108,19 @@ public class HumaneSocietyController {
     //Edit dog method
     private void editDogProfile() throws HumaneSocietyDaoException {
         view.displayEditDogBanner();
-        String dogId = view.getDogToEdit();
-        Dog dog = service.getDog(dogId);
+         Boolean isNull;
+        String dogId = "";
+        Dog dog = new Dog("");
+        do {
+            isNull = false;
+            dogId = view.getAdoptionDogId();
+            if(!service.getDogIds().contains(dogId)) {
+                System.out.println("We don't have that dog!");
+                isNull = true;
+            } else{
+                dog = service.getDog(dogId);
+            }
+        } while (isNull);
         boolean keepGoing = true;
         while (keepGoing) {
             int editSelection = view.printEditMenuAndGetSelection();
