@@ -23,7 +23,7 @@ public class HumaneSocietyController {
     }
 
     // Run method
-    public void run() throws HumaneSocietyDaoException{
+    public void run() throws HumaneSocietyDaoException {
         service.load();
         boolean keepGoing = true;
         int menuSelection = 0;
@@ -82,24 +82,21 @@ public class HumaneSocietyController {
     //Adopt a dog method
     private void adoptADog() throws HumaneSocietyDaoException {
         view.displayAdoptADogBanner();
-
-         Boolean isNull;
-         BigDecimal newMoney = new BigDecimal("0");
-         String dogId = "";
+        Boolean isNull;
+        BigDecimal newMoney = new BigDecimal("0");
+        String dogId = "";
         do {
-           isNull = false;
-            try{
-        dogId = view.getAdoptionDogId();
-
-        Dog dog = service.getDog(dogId);
-        
-        BigDecimal balance = service.loadBudget();
-        newMoney = balance.add(dog.getAdoptionCost());
+            isNull = false;
+            try {
+                dogId = view.getAdoptionDogId();
+                Dog dog = service.getDog(dogId);
+                BigDecimal balance = service.loadBudget();
+                newMoney = balance.add(dog.getAdoptionCost());
             } catch (NullPointerException e) {
                 System.out.println("We don't have that dog!");
                 isNull = true;
             }
-        }while(isNull);
+        } while (isNull);
         service.setCurrentMoney(newMoney);
         service.getDog(dogId).setAdoptionDate(LocalDate.now());
         service.writeBudget(service.getDog(dogId), newMoney);
@@ -119,7 +116,7 @@ public class HumaneSocietyController {
             if (editSelection != 6) {
                 String Change = view.editChange();
                 service.editDog(dog, Change, keepGoing, editSelection);
-            }else{
+            } else {
                 keepGoing = false;
             }
         }
