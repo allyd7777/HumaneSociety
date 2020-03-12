@@ -17,6 +17,15 @@ public class HumaneSocietyView {
     public HumaneSocietyView(UserIOConsoleImpl io) {
         this.io = io;
     }
+    
+    public void dogPicture(){
+        io.print("    ___");
+        io.print(" __/_  `.  .-\"\"\"-.");
+        io.print(" \\_,` | \\-'  /   )`-')");
+        io.print("  \"\") `\"`    \\  ((`\"`");
+        io.print(" ___Y  ,    .'7 /|");
+        io.print("(_,___/...-` (_/_/");
+    }
 
     public int printMenuAndGetSelection() {
         io.print("Welcome to Puppies R Us!");
