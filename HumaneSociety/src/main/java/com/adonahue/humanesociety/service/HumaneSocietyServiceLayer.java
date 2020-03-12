@@ -18,6 +18,8 @@ public interface HumaneSocietyServiceLayer {
     BigDecimal getCurrentMoney();
 
     void setCurrentMoney(BigDecimal balance);
+    
+    BigDecimal loadBudget() throws HumaneSocietyDaoException;
 
     Dog getDog(String id);
 

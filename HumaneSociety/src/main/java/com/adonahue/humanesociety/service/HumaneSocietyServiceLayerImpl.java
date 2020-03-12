@@ -99,6 +99,11 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
     @Override
     public void load() throws HumaneSocietyDaoException {
         dao.loadInventory();
-        bdao.loadBudget();
+        
+    }
+    
+    @Override
+    public BigDecimal loadBudget() throws HumaneSocietyDaoException{
+       return bdao.loadBudget();
     }
 }
