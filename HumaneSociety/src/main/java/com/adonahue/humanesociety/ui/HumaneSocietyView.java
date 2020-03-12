@@ -54,10 +54,11 @@ public class HumaneSocietyView {
         for (Dog d : dogs) {
             io.print(d.getDogId());
             io.print(d.getDogName());
-            io.print(d.getDogSize());
-            io.print(Double.toString(d.getDogAge()));
-            io.print(d.getAdoptionCost().toString());
-            io.print(d.getAdmissionDate().toString());
+            io.print("Size: " + d.getDogSize());
+            io.print("Age: " + Double.toString(d.getDogAge()));
+            io.print("Adoption Cost: $" + d.getAdoptionCost().toString());
+            io.print("Admission Date: " + d.getAdmissionDate().toString());
+            io.print("========================");
         }
     }
 
