@@ -98,8 +98,7 @@ public class HumaneSocietyServiceLayerImpl implements HumaneSocietyServiceLayer 
 
     @Override
     public void load() throws HumaneSocietyDaoException {
-        dao.loadInventory();
-        
+        dao.loadInventory();        
     }
     
     @Override

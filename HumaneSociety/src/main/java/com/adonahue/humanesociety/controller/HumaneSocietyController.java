@@ -83,6 +83,7 @@ public class HumaneSocietyController {
     private void adoptADog() throws HumaneSocietyDaoException {
         view.displayAdoptADogBanner();
         String dogId = view.getAdoptionDogId();
+        
         Dog dog = service.getDog(dogId);
         
         BigDecimal balance = service.loadBudget();
